@@ -32,4 +32,8 @@
         <action id="org.example.demo.ApplySettings" class="org.example.demo.ApplySettings" text="Apply Settings"
                 description="Applies settings currently found in .idea_settings"/>
     </actions>
+
+    <applicationListeners>
+        <listener class="org.example.demo.LiveReloadListener" topic="com.intellij.openapi.fileEditor.FileDocumentManagerListener"/>
+    </applicationListeners>
 </idea-plugin>

@@ -23,56 +23,57 @@ import com.intellij.ui.EditorSettingsProvider
 import kotlinx.serialization.json.*
 import java.io.BufferedReader
 
+fun applySettings(settings : JsonElement) {
+    if (settings is JsonObject) {
+        val editorFactory = EditorFactory.getInstance().allEditors
+        // fontSize
+        val globalEditorSettings = EditorSettingsExternalizable.getInstance()
+
+        val editorColorsManager = EditorColorsManager.getInstance()
+
+        // Access the default global color scheme
+        val globalColorsScheme = editorColorsManager.globalScheme
+
+
+        val fontSize = settings["fontSize"]?.jsonPrimitive?.contentOrNull?.toInt()
+        if (fontSize != null) {
+            val editColorsScheme: EditorColorsScheme = EditorColorsManager.getInstance().globalScheme
+            globalColorsScheme.editorFontSize = fontSize
+        }
+
+        // fontName
+
+        val fontName = settings["font"]?.jsonPrimitive?.contentOrNull
+        if (fontName != null) {
+            val editColorsScheme: EditorColorsScheme = EditorColorsManager.getInstance().globalScheme
+            editColorsScheme.editorFontName = fontName
+        }
+
+        // keymap
+        val jsonKeymap = settings["keymap"]
+        if (jsonKeymap is JsonObject) {
+            val keymapManager = KeymapManager.getInstance()
+            val keymap = keymapManager.activeKeymap
+
+            for (entry in jsonKeymap) {
+                val actionId : String = entry.key
+                val binding : String = entry.value.jsonPrimitive.content
+                println("action : $actionId binding : $binding")
+                keymap.removeAllActionShortcuts(actionId)
+                keymap.addShortcut(actionId, CustomShortcutSet.fromString(binding).shortcuts[0])
+                //keymapManager.bindShortcuts(actionId, binding)
+            }
+        }
+
+        EditorFactory.getInstance().refreshAllEditors()
+
+
+    }
+}
+
 class ApplySettings : AnAction() {
     override fun update(event: AnActionEvent) {
         return super.update(event)
-    }
-    private fun applySettings(settings : JsonElement, p0 : AnActionEvent) {
-        if (settings is JsonObject) {
-            val editorFactory = EditorFactory.getInstance().allEditors
-            // fontSize
-                val globalEditorSettings = EditorSettingsExternalizable.getInstance()
-
-                val editorColorsManager = EditorColorsManager.getInstance()
-
-                // Access the default global color scheme
-                val globalColorsScheme = editorColorsManager.globalScheme
-
-
-            val fontSize = settings["fontSize"]?.jsonPrimitive?.contentOrNull?.toInt()
-            if (fontSize != null) {
-                val editColorsScheme: EditorColorsScheme = EditorColorsManager.getInstance().globalScheme
-                globalColorsScheme.editorFontSize = fontSize
-            }
-
-            // fontName
-
-            val fontName = settings["font"]?.jsonPrimitive?.contentOrNull
-            if (fontName != null) {
-                val editColorsScheme: EditorColorsScheme = EditorColorsManager.getInstance().globalScheme
-                editColorsScheme.editorFontName = fontName
-            }
-
-            // keymap
-            val jsonKeymap = settings["keymap"]
-            if (jsonKeymap is JsonObject) {
-                val keymapManager = KeymapManager.getInstance()
-                val keymap = keymapManager.activeKeymap
-
-                for (entry in jsonKeymap) {
-                    val actionId : String = entry.key
-                    val binding : String = entry.value.jsonPrimitive.content
-                    println("action : $actionId binding : $binding")
-                    keymap.removeAllActionShortcuts(actionId)
-                    keymap.addShortcut(actionId, CustomShortcutSet.fromString(binding).shortcuts[0])
-                    //keymapManager.bindShortcuts(actionId, binding)
-                }
-            }
-
-            EditorFactory.getInstance().refreshAllEditors()
-
-
-        }
     }
     override fun actionPerformed(p0: AnActionEvent) {
         p0.getData(PlatformDataKeys.VIRTUAL_FILE)
@@ -84,7 +85,7 @@ class ApplySettings : AnAction() {
                 val contentBytes = file.contentsToByteArray()
                 val contentJson = String(contentBytes, Charsets.US_ASCII)
                 val content = Json.parseToJsonElement(contentJson)
-                applySettings(content, p0)
+                applySettings(content)
                 print("test")
             }
             print("hi")
