@@ -1,0 +1,12 @@
+{
+  "changeFontSizeWithMouseWheel" : false,
+  "moveCodeFragmentsWithDragAndDrop" : false,
+  "caretBlinking" : 100,
+  "useBlockCaret" : false,
+  "showWhitespace" : false,
+  "fontSize" : 13,
+  "font" : "JetBrains Mono",
+  "keymap" : {
+    "Clone Caret Above" : "Ctrl Alt"
+  }
+}
