@@ -1,13 +1,23 @@
+# Description
+This is a plugin written in Kotlin for Intellij IDEA that allows users to store settings in a dotfile and automatically applies them to the editor with live reload (whenever the file is saved the settings are automatically applied.)
+
+# Usage instructions
+1. To test the plugin you can clone the repo and open it in intellij idea, then use the "Run Plugin" option.
+2. Create a file named ".idea_settings.json" in your project's root directory. This is where you can store the settings.
+3. Edit the ".idea_settings.json" file to add settings! Use the JSON format. You can only change a subset of the IDE settings,  such as fontSize, font (font name). You can also change the keymap by adding new shortcuts in the "keymap" object
+4. Save the .idea_settings.json file to apply changes! You can also use the custom action "Apply Settings" added by the plugin.
+# Example .idea_settings.json
+This is an example of a .idea_settings.json file that this plugin supports.
+All the supported editor settings are listed in the "editor" object,
+but you can add any shortcut you want to the keymap, simply add the "action name" with a string representing the shortcut in a similar format to the example.
+```
 {
-  "changeFontSizeWithMouseWheel" : false,
-  "moveCodeFragmentsWithDragAndDrop" : false,
-  "caretBlinking" : 100,
-  "useBlockCaret" : false,
-  "showWhitespace" : false,
-  "fontSize" : 13,
+  "fontSize" : 14,
   "font" : "JetBrains Mono",
   "keymap" : {
-    "Clone Caret Above" : "Ctrl Alt"
+    "ZoomInIdeAction" : "ctrl alt Z",
+    "ZoomOutIdeAction" : "ctrl shift O",
+    "ShowNavBar" : "ctrl T"
   },
   "editor" : {
     "LINE_SEPARATOR" : null,
@@ -17,7 +27,7 @@
     "CUSTOM_SOFT_WRAP_INDENT" : 0,
     "IS_VIRTUAL_SPACE" : false,
     "IS_CARET_INSIDE_TABS" : false,
-    "STRIP_TRAILING_SPACECS" : "Changed",
+    "STRIP_TRAILING_SPACES" : "Changed",
     "IS_ENSURE_NEWLINE_AT_EOF" : false,
     "REMOVE_TRAILING_BLANK_LINES" : false,
     "SHOW_QUICK_DOC_ON_MOUSE_OVER_ELEMENT" : true,
@@ -62,3 +72,4 @@
     "INSERT_PARANTHESES_AUTOMATICALLY" : true
   }
 }
+```
