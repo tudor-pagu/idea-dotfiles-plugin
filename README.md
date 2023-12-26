@@ -6,6 +6,7 @@ This is a plugin written in Kotlin for Intellij IDEA that allows users to store 
 2. Create a file named ".idea_settings.json" in your project's root directory. This is where you can store the settings.
 3. Edit the ".idea_settings.json" file to add settings! Consult with the example below to see what settings the plugin supports. Use the JSON format. You can only change a subset of the IDE settings,  such as fontSize, font (font name). You can also change the keymap by adding new shortcuts in the "keymap" object
 4. Save the .idea_settings.json file to apply changes! You can also use the custom action "Apply Settings" added by the plugin.
+5. Important: Changes to settings made in the GUI will not take effect if they are different from the ones defined in the .idea_settings.json file.
 # Example .idea_settings.json
 This is an example of a .idea_settings.json file that this plugin supports.
 All the supported editor settings are listed in the "editor" object,
