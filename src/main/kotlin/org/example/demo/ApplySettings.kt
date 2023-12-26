@@ -22,7 +22,29 @@ import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.ui.EditorSettingsProvider
 import kotlinx.serialization.json.*
 import java.io.BufferedReader
+import kotlin.reflect.KMutableProperty
 
+fun unwrapJson(jsonPrimitive: JsonPrimitive) : Any? {
+    if (jsonPrimitive.isString) {
+        return jsonPrimitive.content
+    }
+    if (jsonPrimitive.intOrNull != null) {
+        return jsonPrimitive.intOrNull
+    }
+    if (jsonPrimitive.booleanOrNull != null) {
+        return jsonPrimitive.booleanOrNull
+    }
+    if (jsonPrimitive.floatOrNull != null) {
+        return jsonPrimitive.floatOrNull
+    }
+    if (jsonPrimitive.doubleOrNull != null) {
+        return jsonPrimitive.doubleOrNull
+    }
+    if (jsonPrimitive == jsonPrimitive.jsonNull) {
+        return null
+    }
+    return jsonPrimitive.content
+}
 fun applySettings(settings : JsonElement) {
     if (settings is JsonObject) {
         val editorFactory = EditorFactory.getInstance().allEditors
@@ -34,11 +56,28 @@ fun applySettings(settings : JsonElement) {
         // Access the default global color scheme
         val globalColorsScheme = editorColorsManager.globalScheme
 
-
         val fontSize = settings["fontSize"]?.jsonPrimitive?.contentOrNull?.toInt()
         if (fontSize != null) {
             val editColorsScheme: EditorColorsScheme = EditorColorsManager.getInstance().globalScheme
             globalColorsScheme.editorFontSize = fontSize
+        }
+
+        // editor options
+        val editorOptions = settings["editor"]
+        if (editorOptions is JsonObject) {
+            for (entry in editorOptions) {
+                val optionName = entry.key
+                val value = unwrapJson(entry.value.jsonPrimitive)
+                val property = globalEditorSettings.options::class.members.firstOrNull{it.name == optionName}
+                if (property == null) {
+                    print("error: unkown property - $optionName")
+                } else {
+                    (property as KMutableProperty<*>).setter.call(
+                        globalEditorSettings.options,
+                        value
+                    )
+                }
+            }
         }
 
         // fontName
