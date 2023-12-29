@@ -1,28 +1,13 @@
 package org.example.demo
 
-import com.intellij.configurationStore.getOrCreateVirtualFile
-import com.intellij.ide.plugins.performAction
-import com.intellij.json.JsonFileType
-import com.intellij.lang.Language
-import com.intellij.openapi.actionSystem.AnAction
-import com.intellij.openapi.actionSystem.AnActionEvent
+
 import com.intellij.openapi.actionSystem.CustomShortcutSet
-import com.intellij.openapi.application.ApplicationManager
-import com.intellij.openapi.application.ModalityState
-import com.intellij.openapi.application.runWriteAction
-import com.intellij.openapi.editor.colors.ColorKey
+
 import com.intellij.openapi.editor.colors.EditorColorsManager
 import com.intellij.openapi.editor.ex.EditorSettingsExternalizable
-import com.intellij.openapi.fileChooser.ex.LocalFsFinder.VfsFile
 import com.intellij.openapi.keymap.KeymapManager
-import com.intellij.openapi.util.io.IoTestUtil
-import com.intellij.openapi.vfs.LocalFileSystem
-import com.intellij.openapi.vfs.VfsUtil
-import com.intellij.openapi.vfs.newvfs.impl.VfsRootAccess
-import com.intellij.testFramework.TestActionEvent
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import kotlinx.serialization.json.Json
-import java.io.File
 
 
 class ApplySettingsKtTest : BasePlatformTestCase() {
