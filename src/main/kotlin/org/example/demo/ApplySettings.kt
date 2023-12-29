@@ -45,6 +45,7 @@ fun unwrapJson(jsonPrimitive: JsonPrimitive) : Any? {
     }
     return jsonPrimitive.content
 }
+
 fun applySettings(settings : JsonElement) {
     if (settings is JsonObject) {
         val editorFactory = EditorFactory.getInstance().allEditors
@@ -125,9 +126,7 @@ class ApplySettings : AnAction() {
                 val contentJson = String(contentBytes, Charsets.US_ASCII)
                 val content = Json.parseToJsonElement(contentJson)
                 applySettings(content)
-                print("test")
             }
-            print("hi")
         }
     }
 
