@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c1d71d4-9b25-4505-a326-9fd9c38332c1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/kotlin/org/example/demo/ApplySettingsKtTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/org/example/demo/ApplySettings.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/org/example/demo/ApplySettings.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -279,7 +276,7 @@
       <workItem from="1703841326404" duration="2862000" />
       <workItem from="1703844550212" duration="567000" />
       <workItem from="1703845143750" duration="2034000" />
-      <workItem from="1703847388113" duration="6369000" />
+      <workItem from="1703847388113" duration="7053000" />
     </task>
     <servers />
   </component>

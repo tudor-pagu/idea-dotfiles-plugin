@@ -1,6 +1,6 @@
 # Description
 This is a plugin written in Kotlin for Intellij IDEA that allows users to store settings in a dotfile and automatically applies them to the editor with live reload (whenever the file is saved the settings are automatically applied.)
-
+Author: Tudor Stefan Pagu
 # Usage instructions
 1. To test the plugin you can clone the repo and open it in intellij idea, then use the "Run Plugin" option.
 2. Create a file named ".idea_settings.json" in your project's root directory. This is where you can store the settings.
@@ -74,3 +74,4 @@ but you can add any shortcut you want to the keymap, simply add the "action name
   }
 }
 ```
+
